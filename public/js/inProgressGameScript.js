@@ -16,6 +16,8 @@ document.body.addEventListener('click', event => {
     }
 });
 
+window.onload = setButtons;
+
 //Eventlisteners for all buttons
 document.getElementById('lookForUpdatesBTN').addEventListener('click', lookForUpdates);
 document.getElementById('drawCardBTN').addEventListener('click', drawCard);
