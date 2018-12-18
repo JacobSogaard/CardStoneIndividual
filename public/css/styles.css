@@ -1,0 +1,44 @@
+.card {
+	padding: 25px; 
+	background-color: rgb(0, 66, 107); 
+	display: inline-block;
+	font-size: 10pt;
+	height: 80px;
+	width: 60px;
+}
+
+.selectedcard {
+	padding: 25px; 
+	background-color: rgb(255, 152, 183); 
+	display: inline-block;
+	font-size: 10pt;
+	height: 80px;
+	width: 60px;
+}
+
+.emptycard {
+	padding: 25px; 
+	background-color: rgb(255, 255, 255); 
+	display: inline-block;
+	font-size: 10pt;
+	height: 80px;
+	width: 60px;
+}
+
+.cardslot {
+	padding: 25px; 
+	background-color: #BCC6CC; 
+	display: inline-block;
+	font-size: 10pt;
+	height: 80px;
+	width: 60px;
+}
+
+.cardback {
+	padding: 25px; 
+	background-color: rgb(29, 39, 46); 
+	display: inline-block;
+	font-size: 10pt;
+	height: 70px;
+	width: 60px;
+}

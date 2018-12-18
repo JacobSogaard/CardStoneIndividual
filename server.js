@@ -88,12 +88,6 @@ app.put('/endTurn/:gameId', function(request, response) {
   games[request.params.gameId].endTurn();
 });
 
-var server = app.listen(8080, function() {
-  var host = server.address().address;
-  var port = server.address().port;
-
-  console.log("CardStone server listening at http://%s:%s", host, port);
-});
 
 
 app.get('/getGame/:gameId', function(request, response) {
@@ -114,11 +108,13 @@ app.get('/lookForUpdates/:gameId/:playerId', function(request, response){
     response.status(400);
     response.send("Not current player");
   }
-
-  
-
-
 });
 
+app.use(express.static(__dirname + '/public'));
 
-app.use('/Images', express.static(__dirname + '/Images'));
+var server = app.listen(8080, function() {
+  var host = server.address().address;
+  var port = server.address().port;
+
+  console.log("CardStone server listening at http://%s:%s", host, port);
+});
