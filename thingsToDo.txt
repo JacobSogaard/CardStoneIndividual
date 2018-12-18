@@ -1,0 +1,15 @@
+- Start spil
+	*Sæt en game code
+	*Lad to spillere join
+	*Vis spilsiden
+	*Hav en starthånd
+	*Hvem starter?
+
+- Træk et kort
+
+- Spil et kort
+
+- Angrib med kort
+	*Liv
+
+- Afslut spil?
