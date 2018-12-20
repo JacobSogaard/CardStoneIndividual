@@ -23,7 +23,6 @@ exports.getGame = function() {
 	const game = {player1: this.player1, player2: this.player2, updated: hasUpdated};
 	this.hasUpdated = false;
 	return game;
-
 };
 
 exports.endTurn = function() {
@@ -37,7 +36,6 @@ exports.endTurn = function() {
 		this.player1.currentMana = this.player1.totalMana;
 	}
 	hasUpdated = true;
-	console.log("Current player end turn: " + this.currentPlayer);
 };
 
 exports.getCurrentPlayerName = function(){
@@ -50,17 +48,11 @@ exports.getCurrentPlayerName = function(){
 
 
 exports.create = function(playerName) {
-	console.log("Create call: " + playerName);
-	//this.player1 = require('./Player');
-	//this.player1.setName(playerName);
 	this.player1.name = playerName;
 	this.setDeck('player1', 0);
 };
 
 exports.join = function(playerName) {
-	console.log("Join call: " + playerName);
-	//this.player2 = require('./Player');
-	//this.player2.setName(playerName);
 	this.player2.name = playerName;
 	this.setDeck('player2', 0);
 };
@@ -106,15 +98,12 @@ exports.playCard = function(playerName, cardToPlayId, boardIndex) {
 	if (playerName == this.player1.name && this.currentPlayer == 'p1') {
 		for (var card in this.player1.hand) {
 			if (this.player1.hand[card].id == cardToPlayId) {
-				//break out if card is too expensive to  play
 				if (this.player1.hand[card].cost > this.player1.currentMana) {
-					//break;
+				
 				}
 				var cardPlayed = this.player1.hand[card];
 				this.player1.hand.splice(card, 1);
 				this.player1.board[boardIndex] = cardPlayed;
-				//console.log("boardIndex: " + boardIndex);
-				//console.log(this.player1.board);
 				this.player1.currentMana = this.player1.currentMana - cardPlayed.cost;
 				return this.player1;
 			}
@@ -123,9 +112,7 @@ exports.playCard = function(playerName, cardToPlayId, boardIndex) {
 	} else if (playerName == this.player2.name && this.currentPlayer == 'p2') {
 		for (var card in this.player2.hand) {
 			if (this.player2.hand[card].id == cardToPlayId) {
-				//break out if card is too expensive to  play
 				if (this.player2.hand[card].cost > this.player2.currentMana) {
-					//break;
 				}
 
 				var cardPlayed = this.player2.hand[card];

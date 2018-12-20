@@ -1,4 +1,4 @@
-document.getElementById("createBTN").addEventListener('click', create);
+//document.getElementById("createBTN").addEventListener('click', create);
 document.getElementById("joinBTN").addEventListener('click', join);
 
 function getXhr(targetUrl) {
