@@ -6,16 +6,12 @@ var path = require('path');
 var games = {};
 var fs = require('fs');
 
-//-----List all the implementing api methods------
-
 //API for starting the front page. Should also asign player id.
 app.get('/', function(request, response) {
   response.sendFile(path.join(__dirname+'/Frontpage.html'));
 });
 
-
 app.get('/InProgressGame', function(request, response) {
-
   response.sendFile(path.join(__dirname+'/InProgressGame.html'));
 });
 
@@ -25,13 +21,9 @@ app.get('/joinGame/:gameId/:playerId', function(request, response) {
     game.join(request.params.playerId);
     response.sendFile(path.join(__dirname+'/InProgressGame.html'));
   }
-
-  
-
 });
 
 app.get('/createGame/:gameId/:playerId', function(request, response) {
-  console.log("CREATE GAME");
   var game = require('./modelClasses/Game');
 
   var playerName = request.params.playerId;
@@ -51,16 +43,13 @@ app.get('/createGame/:gameId/:playerId', function(request, response) {
 app.get('/drawCard/:gameId/:playerId', function(request, response) {
   var game = games[request.params.gameId];
   var cardDrawn = game.drawCard(request.params.playerId);
-
   response.setHeader("Access-Control-Allow-Origin", "*"); //How much access should be given?
   response.set("Content-Type", "text/json"); 
   response.end(JSON.stringify(cardDrawn));
-
   console.log(cardDrawn.name + " has been drawn");
 });
 
 app.get('/playCard/:gameId/:playerId/:cardId/:placeOnBoard', function(request, response) {
-
   var gameUpdate = games[request.params.gameId].playCard(request.params.playerId, 
     request.params.cardId, request.params.placeOnBoard);
 
@@ -97,6 +86,13 @@ app.get('/getGame/:gameId', function(request, response) {
   response.end(JSON.stringify(gameState));
 });
 
+app.get('/getGame/:gameId/:boardSize/:handSize', function(request, response) {
+  var gameState = games[request.params.gameId].getGame(request.params.boardSize, request.params.handSize);
+  response.setHeader("Access-Control-Allow-Origin", "*");
+  response.set("Content-Type", "text/json"); 
+  response.end(JSON.stringify(gameState));
+});
+
 app.get('/lookForUpdates/:gameId/:playerId', function(request, response){
   var gameState = games[request.params.gameId];
 
@@ -118,3 +114,4 @@ var server = app.listen(8080, function() {
 
   console.log("CardStone server listening at http://%s:%s", host, port);
 });
+  

@@ -2,7 +2,7 @@ exports.player1 = {
 	name: "",
 	deck: [],
 	hand: [],
-	board: [0,0,0,0,0,0],
+	board: [],
 	currentMana: 0,
 	totalMana: 1
 };
@@ -11,15 +11,32 @@ exports.player2 = {
 	name: "",
 	deck: [],
 	hand: [],
-	board: [0,0,0,0,0,0],
+	board: [],
 	currentMana: 0,
 	totalMana: 1
 };
 
 exports.currentPlayer = 'p1'; //Might want to reconsider this to just use the actual player
 var hasUpdated = false;
+var boardSize;
+var handSize;
 
 exports.getGame = function() {
+	const game = {player1: this.player1, player2: this.player2, updated: hasUpdated};
+	this.hasUpdated = false;
+	return game;
+};
+
+exports.getGame = function(boardSize, handSize) {
+	if (this.boardSize == undefined) {
+		this.boardSize = boardSize;
+		this.handSize = handSize;
+		for (var i = 0; i < this.boardSize; i++) {
+			this.player1.board.push(0);
+			this.player2.board.push(0);
+		}
+	}
+	console.log("Init board: " + this.player1.board);
 	const game = {player1: this.player1, player2: this.player2, updated: hasUpdated};
 	this.hasUpdated = false;
 	return game;
@@ -130,11 +147,11 @@ exports.playCard = function(playerName, cardToPlayId, boardIndex) {
 exports.drawCard = function(playerName) {
 	var cardDrawn = {id : "-1"}; //dummy card if deck is empty or hand is too full
 
-	if (playerName == this.player1.name && this.currentPlayer == 'p1' && this.player1.deck.length > 0 && this.player1.hand.length < 6) {
+	if (playerName == this.player1.name && this.currentPlayer == 'p1' && this.player1.deck.length > 0 && this.player1.hand.length < this.handSize) {
 		cardDrawn = this.player1.deck.pop();
 		this.player1.hand.push(cardDrawn);
 
-	} else if (playerName == this.player2.name && this.currentPlayer == 'p2' && this.player2.deck.length > 0 && this.player2.hand.length < 6) {
+	} else if (playerName == this.player2.name && this.currentPlayer == 'p2' && this.player2.deck.length > 0 && this.player2.hand.length < this.handSize) {
 		cardDrawn = this.player2.deck.pop();
 		this.player2.hand.push(cardDrawn);
 	}

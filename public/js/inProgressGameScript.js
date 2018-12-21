@@ -16,23 +16,23 @@ document.body.addEventListener('click', event => {
     }
 });
 
-window.onload = setButtons;
+window.onload = init;
 
 //Eventlisteners for all buttons
 document.getElementById('lookForUpdatesBTN').addEventListener('click', lookForUpdates);
 document.getElementById('drawCardBTN').addEventListener('click', drawCard);
 document.getElementById('endTurnBTN').addEventListener('click', endTurn);
 
-
 var selectedCardHand = "0"; //Handles the card that is currently selected.
 	var emptyHandPos = "0";
 	var playerHand = [];
 	var selectedCardBoard = "0";
 
-	function setButtons(){
-		console.log("Start of game");
+	function init(){
 		const gameId = sessionStorage.getItem("gameId");
-		const url = `http://localhost:8080/getGame/${gameId}`;
+		const boardSize = document.getElementById("board").childElementCount; 
+		const handSize = document.getElementById("hand").childElementCount;
+		const url = `http://localhost:8080/getGame/${gameId}/${boardSize}/${handSize}`;
 		const xhr = new XMLHttpRequest();
 		xhr.open("GET", url);
 		xhr.send();
@@ -246,7 +246,7 @@ var selectedCardHand = "0"; //Handles the card that is currently selected.
 				}
 				
 				
-			}
+			};
 			document.getElementById(selectedCardBoard.id).className = "card";
 			selectedCardBoard = "0";
 			

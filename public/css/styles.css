@@ -42,3 +42,12 @@
 	height: 70px;
 	width: 60px;
 }
+
+.content {
+	max-width: 500px;
+	margin: auto;
+}
+
+.buttons {
+		margin-bottom: 30px;
+	}
